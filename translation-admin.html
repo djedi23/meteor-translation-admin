@@ -1,0 +1,59 @@
+<head>
+  <title>translation-admin</title>
+</head>
+
+<body>
+  <div class="container">
+    {{> search_translation}}
+    {{> insert_translation}}
+  </div>
+</body>
+
+<template name="insert_translation">
+  {{> quickForm collection=collection id="insertTranslation" type="insert"}}
+</template>
+
+<template name="update_translation">
+  {{> quickForm collection=collection id="updateBookForm" type="update"}}
+</template>
+
+
+<template name="search_translation">
+  <table class="table table-striped">
+    <thead>
+      <tr><td>Domains</td><td>Languages</td><td>Key</td><td>Translation</td></tr>
+	<tr>
+	  <td><div class="input-group input-group-sm">
+	    <span class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></span>
+	    <input type="text" class="form-control" id="filterDomain" placeholder="Domains"/>
+	  </div></td>
+	  <td><div class="input-group input-group-sm">
+	    <span class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></span>
+	    <input type="text" class="form-control" id="filterLang" placeholder="Languages"/>
+	  </div></td>
+	  <td><div class="input-group input-group-sm">
+	    <span class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></span>
+	    <input type="text" class="form-control" id="filterKey" placeholder="Key"/>
+	  </div></td>
+	  <td><div class="input-group input-group-sm">
+	    <span class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></span>
+	    <input type="text" class="form-control" id="filterValue" placeholder="Value"/>
+	  </div></td>
+	</tr>
+    </thead>
+    <tbody>
+      {{#each search_result}}
+      {{> table_item}}
+      {{/each}}
+    </tbody>
+  </table>
+</template>
+
+<template name="table_item">
+  <tr>
+    <td>{{domain}}</td>
+    <td>{{lang}}</td>
+    <td>{{key}}</td>
+    <td>{{value}}</td>
+  </tr>
+</template>
