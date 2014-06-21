@@ -23,6 +23,13 @@ Translation.collection.attachSchema(Schemas.Translations);
 
 
 if (Meteor.isClient) {
+
+    Session.setDefault("translationSearch_domain",""),
+    Session.setDefault("translationSearch_key",""),
+    Session.setDefault("translationSearch_lang",""),
+    Session.setDefault("translationSearch_value","");
+
+
     Deps.autorun(function () {
 	Meteor.subscribe("translationSearch",
 			 Session.get("translationSearch_domain"),
@@ -50,7 +57,6 @@ if (Meteor.isClient) {
 	},
 	"change #filterLang, keyup #filterLang" : function (e,tpl) {
 	    var val = $(e.target).val();
-	    console.log(val);
 	    Session.set("translationSearch_lang", val);
 	},
 	"change #filterValue, keyup #filterValue" : function (e,tpl) {
@@ -73,8 +79,12 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
     Meteor.startup(function () {
-	Meteor.publish('translationSearch', 
+	Meteor.publish('translationSearch',
 		       function(domain, key, lang, value){
+                           check(domain,String);
+                           check(key,String);
+                           check(lang,String);
+                           check(value,String);
 			   return Translation.collection.find({domain: {$regex: domain},
 							       key: {$regex: key},
 							       lang: {$regex: lang},
