@@ -19,27 +19,27 @@
 
 
 <template name="search_translation">
-  <table class="table table-striped">
+  <table class="table table-striped table-hover table-condensed">
     <thead>
       <tr><td>Domains</td><td>Languages</td><td>Key</td><td>Translation</td></tr>
-	<tr>
-	  <td><div class="input-group input-group-sm">
-	    <span class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></span>
-	    <input type="text" class="form-control" id="filterDomain" placeholder="Domains"/>
-	  </div></td>
-	  <td><div class="input-group input-group-sm">
-	    <span class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></span>
-	    <input type="text" class="form-control" id="filterLang" placeholder="Languages"/>
-	  </div></td>
-	  <td><div class="input-group input-group-sm">
-	    <span class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></span>
-	    <input type="text" class="form-control" id="filterKey" placeholder="Key"/>
-	  </div></td>
-	  <td><div class="input-group input-group-sm">
-	    <span class="input-group-addon"><span class="glyphicon glyphicon-filter"></span></span>
-	    <input type="text" class="form-control" id="filterValue" placeholder="Value"/>
-	  </div></td>
-	</tr>
+      <tr>
+	<td><div class="input-group input-group-sm">
+	  <span class="input-group-addon hidden-xs"><span class="glyphicon glyphicon-filter"></span></span>
+	  <input type="text" class="form-control" id="filterDomain" placeholder="Domains"/>
+	</div></td>
+	<td><div class="input-group input-group-sm">
+	  <span class="input-group-addon hidden-xs"><span class="glyphicon glyphicon-filter"></span></span>
+	  <input type="text" class="form-control" id="filterLang" placeholder="Languages"/>
+	</div></td>
+	<td><div class="input-group input-group-sm">
+	  <span class="input-group-addon hidden-xs"><span class="glyphicon glyphicon-filter"></span></span>
+	  <input type="text" class="form-control" id="filterKey" placeholder="Key"/>
+	</div></td>
+	<td><div class="input-group input-group-sm">
+	  <span class="input-group-addon hidden-xs"><span class="glyphicon glyphicon-filter"></span></span>
+	  <input type="text" class="form-control" id="filterValue" placeholder="Value"/>
+	</div></td>
+      </tr>
     </thead>
     <tbody>
       {{#each search_result}}
