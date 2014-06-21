@@ -58,6 +58,17 @@ if (Meteor.isClient) {
 	    Session.set("translationSearch_value", val);
 	}
     });
+
+    Template.table_item.events({
+        'click .view' : function (e, tpl){
+            console.log(tpl.data);
+            Session.set('translation_edit', tpl.data._id);
+        }
+    });
+
+    Template.table_item.edit = function(){
+        return this._id === Session.get('translation_edit');
+    }
 }
 
 if (Meteor.isServer) {
