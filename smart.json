@@ -5,7 +5,6 @@
     },
     "bootstrap3-less": {},
     "iron-router": {},
-    "roles": {},
-    "autoform": {}
+    "roles": {}
   }
 }
