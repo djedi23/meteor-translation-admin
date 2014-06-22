@@ -116,6 +116,19 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
     Meteor.startup(function () {
+
+        Translation.add_translation(['translation'], 'domains', Translation.lang_EN, 'Domains');
+        Translation.add_translation(['translation'], 'key', Translation.lang_EN, 'Key');
+        Translation.add_translation(['translation'], 'languages', Translation.lang_EN, 'Languages');
+        Translation.add_translation(['translation'], 'translation', Translation.lang_EN, 'Translation');
+
+        Translation.add_translation(['translation'], 'domains', Translation.lang_FR, 'Domaines');
+        Translation.add_translation(['translation'], 'key', Translation.lang_FR, 'Clé');
+        Translation.add_translation(['translation'], 'languages', Translation.lang_FR, 'Langues');
+        Translation.add_translation(['translation'], 'translation', Translation.lang_FR, 'Tranduction');
+
+
+
 	Meteor.publish('translationSearch',
 		       function(domain, key, lang, value){
                            check(domain,String);
