@@ -3,11 +3,7 @@
 	     this.route('translation_admin',
 			{
 			    path: '/',
-			    waitOn: function() { return Meteor.subscribe("translationSearch",
-									 Session.get("translationSearch_domain"),
-									 Session.get("translationSearch_key"),
-									 Session.get("translationSearch_lang"),
-									 Session.get("translationSearch_value"));
+			    waitOn: function() { return Meteor.subscribe(Translation.publish, ["translation"], Translation.current_lang());
 					       },
 			    layoutTemplate: 'translation_admin_layout'
 			});
@@ -22,9 +18,25 @@ if (Meteor.isClient) {
     Session.setDefault("translationSearch_lang",""),
     Session.setDefault("translationSearch_value","");
 
+    Deps.autorun(function () {
+	Meteor.subscribe("translationSearch",
+			 Session.get("translationSearch_domain"),
+			 Session.get("translationSearch_key"),
+			 Session.get("translationSearch_lang"),
+			 Session.get("translationSearch_value"));
+    });
 
     Template.translation_admin.search_result = function(){
-	return Translation.collection.find({});
+        var set={};
+        if (!_.isEmpty(Session.get("translationSearch_domain")))
+            set.domain = {$regex: Session.get("translationSearch_domain")};
+        if (!_.isEmpty(Session.get("translationSearch_key")))
+            set.key = {$regex: Session.get("translationSearch_key")};
+        if (!_.isEmpty(Session.get("translationSearch_lang")))
+            set.lang = {$regex: Session.get("translationSearch_lang")};
+        if (!_.isEmpty(Session.get("translationSearch_value")))
+            set.value = {$regex: Session.get("translationSearch_value")};
+	return Translation.collection.find(set, { sort: ["domain", "key"], limit: 20, skip: 0 });
     };
 
     Template.translation_admin.newline = function(){
@@ -147,7 +159,6 @@ if (Meteor.isServer) {
 							       value: {$regex: value}
 							      },
 							      {
-								  sort: ["domain", "key"],
 								  limit: 20,
 								  skip: 0
 							      }
