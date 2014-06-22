@@ -40,7 +40,14 @@ if (Meteor.isClient) {
     };
 
     Template.translation_admin.newline = function(){
-	return Session.get('translation_edit') === 'new';
+	return Session.get('translation_edit') === 'new' || _.isObject(Session.get('translation_edit'));
+    };
+
+    Template.translation_admin.initial_new_line = function(){
+        if (_.isObject(Session.get('translation_edit')))
+	    return Session.get('translation_edit');
+        else
+            return undefined;
     };
 
 
@@ -90,7 +97,13 @@ if (Meteor.isClient) {
 		Translation.collection.update(tpl.data._id, {$set: set});
 		Session.set('translation_edit', undefined);
 	    }
-	}
+	},
+        'click #remove': function(e, tpl){
+            Translation.collection.remove(tpl.data._id);
+        },
+        'click #copy': function(e, tpl){
+	    Session.set('translation_edit', tpl.data);
+        }
     });
 
     Template.table_item.edit = function(){

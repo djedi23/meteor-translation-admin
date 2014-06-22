@@ -32,7 +32,9 @@
     </thead>
     <tbody>
       {{#if newline}}
-            {{> new_table_item}}
+       {{#with initial_new_line}}
+        {{> new_table_item}}
+       {{/with}}
       {{/if}}
       {{#each search_result}}
       {{> table_item}}
@@ -50,8 +52,8 @@
     <td><input class="form-control ivalue" value="{{value}}"/></td>
     <td>
       <a class="link-btn" id="validate"><span class="glyphicon glyphicon-ok"></span></a>
-      <a class="link-btn"><span class="glyphicon glyphicon-share"></span></a>
-      <a class="link-btn"><span class="glyphicon glyphicon-minus"></span></a>
+      <a class="link-btn" id="copy"><span class="glyphicon glyphicon-share"></span></a>
+      <a class="link-btn" id="remove"><span class="glyphicon glyphicon-minus"></span></a>
     </td>
   </tr>
   {{else}}
@@ -67,10 +69,10 @@
 
 <template name="new_table_item">
   <tr>
-    <td><input class="form-control idomain"/></td>
-    <td><input class="form-control ikey"/></td>
-    <td><input class="form-control ilang"/></td>
-    <td><input class="form-control ivalue"/></td>
+    <td><input class="form-control idomain" value="{{domain}}"/></td>
+    <td><input class="form-control ikey" value="{{key}}"/></td>
+    <td><input class="form-control ilang" value="{{lang}}"/></td>
+    <td><input class="form-control ivalue" value="{{value}}"/></td>
     <td>
       <a class="link-btn" id="validate"><span class="glyphicon glyphicon-ok"></span></a>
     </td>
