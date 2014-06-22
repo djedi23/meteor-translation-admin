@@ -3,8 +3,6 @@
     "translation": {
       "path": "/home/djedi/prj/meteor/translation"
     },
-    "bootstrap3-less": {},
-    "iron-router": {},
-    "roles": {}
+    "bootstrap3-less": {}
   }
 }
