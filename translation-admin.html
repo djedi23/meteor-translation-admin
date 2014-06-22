@@ -9,23 +9,23 @@
 <template name="translation_admin">
   <table class="table table-striped table-hover">
     <thead>
-      <tr><td>{{_ "domains" "translation"}}</td><td>{{_ "key" "translation"}}</td><td>{{_ "languages" "translation"}}</td><td>{{_ "translation" "translation"}}</td><td><span class="col-md-1" style="width:65px"></span></td></tr>
+      <tr><td>{{_ "domains" admin_domain}}</td><td>{{_ "key" admin_domain}}</td><td>{{_ "languages" admin_domain}}</td><td>{{_ "translation" admin_domain}}</td><td><span class="col-md-1" style="width:65px"></span></td></tr>
       <tr>
 	<td><div class="input-group input-group-sm">
 	  <span class="input-group-addon hidden-xs"><span class="glyphicon glyphicon-filter"></span></span>
-	  <input type="text" class="form-control" id="filterDomain" placeholder="{{_ "domains" "translation"}}"/>
+	  <input type="text" class="form-control" id="filterDomain" placeholder="{{_ "domains" admin_domain}}"/>
 	</div></td>
 	<td><div class="input-group input-group-sm">
 	  <span class="input-group-addon hidden-xs"><span class="glyphicon glyphicon-filter"></span></span>
-	  <input type="text" class="form-control" id="filterKey" placeholder="{{_ "key" "translation"}}"/>
+	  <input type="text" class="form-control" id="filterKey" placeholder="{{_ "key" admin_domain}}"/>
 	</div></td>
 	<td><div class="input-group input-group-sm">
 	  <span class="input-group-addon hidden-xs"><span class="glyphicon glyphicon-filter"></span></span>
-	  <input type="text" class="form-control" id="filterLang" placeholder="{{_ "languages" "translation"}}"/>
+	  <input type="text" class="form-control" id="filterLang" placeholder="{{_ "languages" admin_domain}}"/>
 	</div></td>
 	<td><div class="input-group input-group-sm">
 	  <span class="input-group-addon hidden-xs"><span class="glyphicon glyphicon-filter"></span></span>
-	  <input type="text" class="form-control" id="filterValue" placeholder="{{_ "translation" "translation"}}"/>
+	  <input type="text" class="form-control" id="filterValue" placeholder="{{_ "translation" admin_domain}}"/>
 	</div></td>
 	<td><a class="link-btn" id="add_line"><span class="glyphicon glyphicon-plus"></span></a></td>
       </tr>

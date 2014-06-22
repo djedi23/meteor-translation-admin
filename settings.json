@@ -1,0 +1,9 @@
+{
+    "public": {
+        "translation" : {
+	    "admin": {
+		"use_router" : true
+	    }
+	}
+    }
+}

@@ -1,14 +1,32 @@
-     if (! _.isUndefined(Router)) {
-	 Router.map(function() {
-	     this.route('translation_admin',
-			{
-			    path: '/',
-			    waitOn: function() { return Meteor.subscribe(Translation.publish, ["translation"], Translation.current_lang());
-					       },
-			    layoutTemplate: 'translation_admin_layout'
-			});
-	 });
-     }
+
+var set_default = function(setting, default_value){
+    return  (typeof Meteor.settings != 'undefined' &&
+             typeof Meteor.settings.public != 'undefined' &&
+             typeof Meteor.settings.public.translation != 'undefined' &&
+             typeof Meteor.settings.public.translation.admin != 'undefined' &&
+             Meteor.settings.public.translation.admin[setting])
+         ? Meteor.settings.public.translation.admin[setting] : default_value;
+    };
+
+var max_query_size = set_default("max_query_size", 100);
+var admin_domain = set_default("admin_domain", "translation_admin");
+var use_router = set_default("use_router", false);
+var route_name = set_default("route_name", "translation_admin");
+var route_path = set_default("route_path", "/");
+
+
+
+if (use_router && ! _.isUndefined(Router)) {
+    Router.map(function() {
+	this.route(route_name,
+		   {
+		       path: route_path,
+		       waitOn: function() { return Meteor.subscribe(Translation.publish, [admin_domain], Translation.current_lang());
+					  },
+		       layoutTemplate: 'translation_admin_layout'
+		   });
+    });
+}
 
 
 if (Meteor.isClient) {
@@ -26,6 +44,10 @@ if (Meteor.isClient) {
 			 Session.get("translationSearch_value"));
     });
 
+    Template.translation_admin.admin_domain = function(){
+        return admin_domain;
+    };
+
     Template.translation_admin.search_result = function(){
         var set={};
         if (!_.isEmpty(Session.get("translationSearch_domain")))
@@ -36,7 +58,7 @@ if (Meteor.isClient) {
             set.lang = {$regex: Session.get("translationSearch_lang")};
         if (!_.isEmpty(Session.get("translationSearch_value")))
             set.value = {$regex: Session.get("translationSearch_value")};
-	return Translation.collection.find(set, { sort: ["domain", "key"], limit: 20, skip: 0 });
+	return Translation.collection.find(set, { sort: ["domain", "key"], limit: max_query_size, skip: 0 });
     };
 
     Template.translation_admin.newline = function(){
@@ -148,15 +170,15 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
     Meteor.startup(function () {
 
-        Translation.add_translation(['translation'], 'domains', Translation.lang_EN, 'Domains');
-        Translation.add_translation(['translation'], 'key', Translation.lang_EN, 'Key');
-        Translation.add_translation(['translation'], 'languages', Translation.lang_EN, 'Languages');
-        Translation.add_translation(['translation'], 'translation', Translation.lang_EN, 'Translation');
+        Translation.add_translation([admin_domain], 'domains', Translation.lang_EN, 'Domains');
+        Translation.add_translation([admin_domain], 'key', Translation.lang_EN, 'Key');
+        Translation.add_translation([admin_domain], 'languages', Translation.lang_EN, 'Languages');
+        Translation.add_translation([admin_domain], 'translation', Translation.lang_EN, 'Translation');
 
-        Translation.add_translation(['translation'], 'domains', Translation.lang_FR, 'Domaines');
-        Translation.add_translation(['translation'], 'key', Translation.lang_FR, 'Clé');
-        Translation.add_translation(['translation'], 'languages', Translation.lang_FR, 'Langues');
-        Translation.add_translation(['translation'], 'translation', Translation.lang_FR, 'Tranduction');
+        Translation.add_translation([admin_domain], 'domains', Translation.lang_FR, 'Domaines');
+        Translation.add_translation([admin_domain], 'key', Translation.lang_FR, 'Clé');
+        Translation.add_translation([admin_domain], 'languages', Translation.lang_FR, 'Langues');
+        Translation.add_translation([admin_domain], 'translation', Translation.lang_FR, 'Tranduction');
 
 
 
@@ -172,7 +194,7 @@ if (Meteor.isServer) {
 							       value: {$regex: value}
 							      },
 							      {
-								  limit: 20,
+								  limit: max_query_size,
 								  skip: 0
 							      }
 							     );
