@@ -1,4 +1,18 @@
-
+     if (! _.isUndefined(Router)) {
+	 Router.map(function() {
+	     this.route('translation_admin',
+			{
+			    path: '/',
+			    waitOn: function() { return Meteor.subscribe("translationSearch",
+									 Session.get("translationSearch_domain"),
+									 Session.get("translationSearch_key"),
+									 Session.get("translationSearch_lang"),
+									 Session.get("translationSearch_value"));
+					       },
+			    layoutTemplate: 'translation_admin_layout'
+			});
+	 });
+     }
 
 
 if (Meteor.isClient) {
@@ -9,24 +23,16 @@ if (Meteor.isClient) {
     Session.setDefault("translationSearch_value","");
 
 
-    Deps.autorun(function () {
-	Meteor.subscribe("translationSearch",
-			 Session.get("translationSearch_domain"),
-			 Session.get("translationSearch_key"),
-			 Session.get("translationSearch_lang"),
-			 Session.get("translationSearch_value"));
-    });
-
-    Template.search_translation.search_result = function(){
-        return Translation.collection.find({});
+    Template.translation_admin.search_result = function(){
+	return Translation.collection.find({});
     };
 
-    Template.search_translation.newline = function(){
-        return Session.get('translation_edit') === 'new';
+    Template.translation_admin.newline = function(){
+	return Session.get('translation_edit') === 'new';
     };
 
 
-    Template.search_translation.events({
+    Template.translation_admin.events({
 	"change #filterDomain, keyup #filterDomain" : function (e,tpl) {
 	    var val = $(e.target).val();
 	    Session.set("translationSearch_domain", val);
@@ -49,9 +55,9 @@ if (Meteor.isClient) {
     });
 
     Template.table_item.events({
-        'click .view' : function (e, tpl){
-            Session.set('translation_edit', tpl.data._id);
-        },
+	'click .view' : function (e, tpl){
+	    Session.set('translation_edit', tpl.data._id);
+	},
 	'click #validate': function(e, tpl){
 	    var set={};
 	    var value = $(tpl.find('.ivalue')).val().trim();
@@ -76,7 +82,7 @@ if (Meteor.isClient) {
     });
 
     Template.table_item.edit = function(){
-        return this._id === Session.get('translation_edit');
+	return this._id === Session.get('translation_edit');
     };
 
     Template.new_table_item.events({
@@ -131,10 +137,10 @@ if (Meteor.isServer) {
 
 	Meteor.publish('translationSearch',
 		       function(domain, key, lang, value){
-                           check(domain,String);
-                           check(key,String);
-                           check(lang,String);
-                           check(value,String);
+			   check(domain,String);
+			   check(key,String);
+			   check(lang,String);
+			   check(value,String);
 			   return Translation.collection.find({domain: {$regex: domain},
 							       key: {$regex: key},
 							       lang: {$regex: lang},
