@@ -19,7 +19,7 @@ var route_yieldTemplates = set_default("route_yieldTemplates", {});
 
 
 
-if (use_router && ! _.isUndefined(Router)) {
+if (use_router && typeof Router !== 'undefined') {
     Router.map(function() {
 	this.route(route_name,
 		   {
@@ -76,7 +76,7 @@ if (Meteor.isClient) {
             if (_.isObject(Session.get('translation_edit')))
 	        return Session.get('translation_edit');
             else
-                return undefined;
+                return {};
         };
 
 
