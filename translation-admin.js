@@ -5,7 +5,7 @@ var set_default = function(setting, default_value){
              typeof Meteor.settings.public.translation != 'undefined' &&
              typeof Meteor.settings.public.translation.admin != 'undefined' &&
              Meteor.settings.public.translation.admin[setting])
-         ? Meteor.settings.public.translation.admin[setting] : default_value;
+        ? Meteor.settings.public.translation.admin[setting] : default_value;
 };
 
 var max_query_size = set_default("max_query_size", 100);
@@ -104,71 +104,71 @@ if (Meteor.isClient) {
 
         Template.table_item.events({
 	    'click .view' : function (e, tpl){
-	                              Session.set('translation_edit', tpl.data._id);
-	                          },
+	        Session.set('translation_edit', tpl.data._id);
+	    },
 	    'click #validate': function(e, tpl){
-	                 var set={};
-	                 var value = $(tpl.find('.ivalue')).val().trim();
-	                 if (!_.isEmpty(value) && tpl.data.value !== value)
-		             set.value = value;
-	                 var key = $(tpl.find('.ikey')).val().trim();
-	                 if (!_.isEmpty(key) && tpl.data.key !== key)
-		             set.key = key;
-	                 var lang = $(tpl.find('.ilang')).val().trim().split(',');
-	                 if (!_.isEmpty($(tpl.find('.ilang')).val().trim()) && tpl.data.lang != lang)
-		             set.lang = lang;
-	                 var domain = $(tpl.find('.idomain')).val().trim().split(',');
-	                 if (!_.isEmpty($(tpl.find('.idomain')).val().trim()) && tpl.data.domain != domain)
-		             set.domain = domain;
+	        var set={};
+	        var value = $(tpl.find('.ivalue')).val().trim();
+	        if (!_.isEmpty(value) && tpl.data.value !== value)
+		    set.value = value;
+	        var key = $(tpl.find('.ikey')).val().trim();
+	        if (!_.isEmpty(key) && tpl.data.key !== key)
+		    set.key = key;
+	        var lang = $(tpl.find('.ilang')).val().trim().split(',');
+	        if (!_.isEmpty($(tpl.find('.ilang')).val().trim()) && tpl.data.lang != lang)
+		    set.lang = lang;
+	        var domain = $(tpl.find('.idomain')).val().trim().split(',');
+	        if (!_.isEmpty($(tpl.find('.idomain')).val().trim()) && tpl.data.domain != domain)
+		    set.domain = domain;
 
-	                 console.log(set);
-	                 if (! _.isEmpty(set)){
-		             Translation.collection.update(tpl.data._id, {$set: set});
-		             Session.set('translation_edit', undefined);
-	                 }
-	             },
+	        console.log(set);
+	        if (! _.isEmpty(set)){
+		    Translation.collection.update(tpl.data._id, {$set: set});
+		    Session.set('translation_edit', undefined);
+	        }
+	    },
             'click #remove': function(e, tpl){
-                              Translation.collection.remove(tpl.data._id);
-                          },
+                Translation.collection.remove(tpl.data._id);
+            },
             'click #copy': function(e, tpl){
-	              Session.set('translation_edit', tpl.data);
-                  }
+	        Session.set('translation_edit', tpl.data);
+            }
         });
 
         Template.table_item.edit = function(){
-	     return this._id === Session.get('translation_edit');
-         };
+	    return this._id === Session.get('translation_edit');
+        };
 
         Template.new_table_item.events({
 	    'click #validate': function(e, tpl){
-	                   var set={};
-	                   var value = $(tpl.find('.ivalue')).val().trim();
-	                   if (!_.isEmpty(value))
-		               set.value = value;
-	                   else
-		               return;
-	                   var key = $(tpl.find('.ikey')).val().trim();
-	                   if (!_.isEmpty(key))
-		               set.key = key;
-	                   else
-		               return;
-	                   var lang = $(tpl.find('.ilang')).val().trim().split(',');
-	                   if (!_.isEmpty($(tpl.find('.ilang')).val().trim()))
-		               set.lang = lang;
-	                   else
-		               return;
-	                   var domain = $(tpl.find('.idomain')).val().trim().split(',');
-	                   if (!_.isEmpty($(tpl.find('.idomain')).val().trim()))
-		               set.domain = domain;
-	                   else
-		               return;
+	        var set={};
+	        var value = $(tpl.find('.ivalue')).val().trim();
+	        if (!_.isEmpty(value))
+		    set.value = value;
+	        else
+		    return;
+	        var key = $(tpl.find('.ikey')).val().trim();
+	        if (!_.isEmpty(key))
+		    set.key = key;
+	        else
+		    return;
+	        var lang = $(tpl.find('.ilang')).val().trim().split(',');
+	        if (!_.isEmpty($(tpl.find('.ilang')).val().trim()))
+		    set.lang = lang;
+	        else
+		    return;
+	        var domain = $(tpl.find('.idomain')).val().trim().split(',');
+	        if (!_.isEmpty($(tpl.find('.idomain')).val().trim()))
+		    set.domain = domain;
+	        else
+		    return;
 
-	                   console.log(set);
-	                   if (! _.isEmpty(set)){
-		               Translation.collection.insert(set);
-		               Session.set('translation_edit', undefined);
-	                   }
-	               }
+	        console.log(set);
+	        if (! _.isEmpty(set)){
+		    Translation.collection.insert(set);
+		    Session.set('translation_edit', undefined);
+	        }
+	    }
         });
 
     });
