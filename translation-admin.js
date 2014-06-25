@@ -196,16 +196,18 @@ if (Meteor.isServer) {
 			   check(key,String);
 			   check(lang,String);
 			   check(value,String);
-			   return Translation.collection.find({domain: {$regex: domain},
-							       key: {$regex: key},
-							       lang: {$regex: lang},
-							       value: {$regex: value}
-							      },
-							      {
-								  limit: max_query_size,
-								  skip: 0
-							      }
-							     );
+
+			   return Translation.collection.canPublish(this.userId, domain, lang, key) &&
+			       Translation.collection.find({domain: {$regex: domain},
+							    key: {$regex: key},
+							    lang: {$regex: lang},
+							    value: {$regex: value}
+							   },
+							   {
+							       limit: max_query_size,
+							       skip: 0
+							   }
+							  ) || [];
 		       });
     });
 }
