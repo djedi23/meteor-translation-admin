@@ -25,7 +25,7 @@ if (use_router && typeof Router !== 'undefined') {
 		   {
 		       path: route_path,
                        tamplate: 'translation_admin',
-		       waitOn: function() { return Meteor.subscribe(Translation.publish, [admin_domain], Translation.current_lang());
+		       waitOn: function() { return Meteor.subscribe(Translation.publish, [admin_domain], Translation.currentLang());
 					  },
 		       layoutTemplate: route_template_layout,
                        yieldTemplates: route_yieldTemplates
@@ -178,15 +178,15 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
     Meteor.startup(function () {
 
-        Translation.add_translation([admin_domain], 'domains', Translation.lang_EN, 'Domains');
-        Translation.add_translation([admin_domain], 'key', Translation.lang_EN, 'Key');
-        Translation.add_translation([admin_domain], 'languages', Translation.lang_EN, 'Languages');
-        Translation.add_translation([admin_domain], 'translation', Translation.lang_EN, 'Translation');
+        Translation.addTranslation([admin_domain], 'domains', Translation.lang_EN, 'Domains');
+        Translation.addTranslation([admin_domain], 'key', Translation.lang_EN, 'Key');
+        Translation.addTranslation([admin_domain], 'languages', Translation.lang_EN, 'Languages');
+        Translation.addTranslation([admin_domain], 'translation', Translation.lang_EN, 'Translation');
 
-        Translation.add_translation([admin_domain], 'domains', Translation.lang_FR, 'Domaines');
-        Translation.add_translation([admin_domain], 'key', Translation.lang_FR, 'Clé');
-        Translation.add_translation([admin_domain], 'languages', Translation.lang_FR, 'Langues');
-        Translation.add_translation([admin_domain], 'translation', Translation.lang_FR, 'Tranduction');
+        Translation.addTranslation([admin_domain], 'domains', Translation.lang_FR, 'Domaines');
+        Translation.addTranslation([admin_domain], 'key', Translation.lang_FR, 'Clé');
+        Translation.addTranslation([admin_domain], 'languages', Translation.lang_FR, 'Langues');
+        Translation.addTranslation([admin_domain], 'translation', Translation.lang_FR, 'Tranduction');
 
 
 
