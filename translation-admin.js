@@ -186,7 +186,8 @@ if (Meteor.isServer) {
         Translation.addTranslation([admin_domain], 'domains', Translation.lang_FR, 'Domaines');
         Translation.addTranslation([admin_domain], 'key', Translation.lang_FR, 'Clé');
         Translation.addTranslation([admin_domain], 'languages', Translation.lang_FR, 'Langues');
-        Translation.addTranslation([admin_domain], 'translation', Translation.lang_FR, 'Tranduction');
+        Translation.addTranslation([admin_domain], 'translation', Translation.lang_FR, 'Traduction');
+
 
 
 
