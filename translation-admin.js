@@ -26,7 +26,7 @@ if (use_router && typeof Router !== 'undefined') {
 		   {
 		       path: '/',
                        template: 'main',
-		       waitOn: function() { return Meteor.subscribe(Translation.publish, ['nav', 'general'], Translation.currentLang());
+		       waitOn: function() { return Meteor.subscribe(Translation.publish, ['nav', 'general', 'sandbox'], Translation.currentLang());
 					  },
 		       layoutTemplate: route_template_layout,
                        yieldTemplates: route_yieldTemplates
@@ -54,12 +54,12 @@ if (Meteor.isClient) {
         Session.setDefault("translationSearch_value","");
 
         Deps.autorun(function () {
-	    Meteor.subscribe("translationSearch",
-			     Session.get("translationSearch_domain"),
-			     Session.get("translationSearch_key"),
-			     Session.get("translationSearch_lang"),
-			     Session.get("translationSearch_value"));
-	    Meteor.subscribe(Translation.publish, ['nav', 'general', admin_domain], Translation.currentLang());
+	    if (Router.current() && Router.current().route.name === route_name)
+		Meteor.subscribe("translationSearch",
+				 Session.get("translationSearch_domain"),
+				 Session.get("translationSearch_key"),
+				 Session.get("translationSearch_lang"),
+				 Session.get("translationSearch_value"));
         });
 
         Template.translation_admin.admin_domain = function(){
@@ -223,6 +223,7 @@ if (Meteor.isServer) {
 
 
         Translation.addTranslation(['general'], 'projectName', Translation.lang_EN, 'Translation');
+        Translation.addTranslation(['general'], 'projectName', Translation.lang_FR, 'Translation');
 
         Translation.addTranslation(['nav'], 'toggleNavigation', Translation.lang_EN, 'Toggle Navigation');
         Translation.addTranslation(['nav'], 'toggleNavigation', Translation.lang_FR, 'Changer la Navigation');
