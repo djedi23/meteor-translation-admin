@@ -21,11 +21,23 @@ var route_yieldTemplates = set_default("route_yieldTemplates", {});
 
 if (use_router && typeof Router !== 'undefined') {
     Router.map(function() {
+
+	this.route("root",
+		   {
+		       path: '/',
+                       template: 'main',
+		       waitOn: function() { return Meteor.subscribe(Translation.publish, ['nav', 'general'], Translation.currentLang());
+					  },
+		       layoutTemplate: route_template_layout,
+                       yieldTemplates: route_yieldTemplates
+		   });
+
+
 	this.route(route_name,
 		   {
 		       path: route_path,
                        template: 'translation_admin',
-		       waitOn: function() { return Meteor.subscribe(Translation.publish, [admin_domain], Translation.currentLang());
+		       waitOn: function() { return Meteor.subscribe(Translation.publish, ['nav', 'general', admin_domain], Translation.currentLang());
 					  },
 		       layoutTemplate: route_template_layout,
                        yieldTemplates: route_yieldTemplates
@@ -47,6 +59,7 @@ if (Meteor.isClient) {
 			     Session.get("translationSearch_key"),
 			     Session.get("translationSearch_lang"),
 			     Session.get("translationSearch_value"));
+	    Meteor.subscribe(Translation.publish, ['nav', 'general', admin_domain], Translation.currentLang());
         });
 
         Template.translation_admin.admin_domain = function(){
@@ -64,7 +77,7 @@ if (Meteor.isClient) {
             if (!_.isEmpty(Session.get("translationSearch_value")))
                 set.value = {$regex: Session.get("translationSearch_value")};
 
-//            console.log(set);
+	    //            console.log(set);
 	    return Translation.collection.find(set, { sort: ["domain", "key"], limit: max_query_size, skip: 0 });
         };
 
@@ -169,7 +182,27 @@ if (Meteor.isClient) {
 		    Session.set('translation_edit', undefined);
 	        }
 	    }
-        });
+	});
+
+	Template.layout.activeNavbar = function(item){
+	    return Router.current().route.name === item && "active" || false;
+	};
+
+	Template.layout.currentLang = function(){
+	    if (_.find(Translation.lang_FR, function(e){ return e===Translation.currentLang();}))
+		return 'FR';
+	    else
+		return 'EN';
+	};
+
+	Template.layout.events({
+	    'click #chooseEN': function(){
+		Translation.currentLang('en');
+	    },
+	    'click #chooseFR': function(){
+		Translation.currentLang('fr');
+	    }
+	});
 
     });
 
@@ -188,6 +221,28 @@ if (Meteor.isServer) {
         Translation.addTranslation([admin_domain], 'languages', Translation.lang_FR, 'Langues');
         Translation.addTranslation([admin_domain], 'translation', Translation.lang_FR, 'Traduction');
 
+
+        Translation.addTranslation(['general'], 'projectName', Translation.lang_EN, 'Translation');
+
+        Translation.addTranslation(['nav'], 'toggleNavigation', Translation.lang_EN, 'Toggle Navigation');
+        Translation.addTranslation(['nav'], 'toggleNavigation', Translation.lang_FR, 'Changer la Navigation');
+
+
+        Translation.addTranslation(['nav'], 'about', Translation.lang_EN, 'About');
+        Translation.addTranslation(['nav'], 'admin', Translation.lang_EN, 'Administration');
+
+        Translation.addTranslation(['nav'], 'about', Translation.lang_FR, 'À propos');
+        Translation.addTranslation(['nav'], 'admin', Translation.lang_FR, 'Administration');
+
+        Translation.addTranslation(['nav'], 'english', Translation.lang_EN, 'English');
+        Translation.addTranslation(['nav'], 'english', Translation.lang_FR, 'Anglais');
+
+        Translation.addTranslation(['nav'], 'french', Translation.lang_EN, 'French');
+        Translation.addTranslation(['nav'], 'french', Translation.lang_FR, 'Français');
+
+
+        Translation.addTranslation(['sandbox'], 'sandbox', Translation.lang_FR, 'Bac à sable');
+        Translation.addTranslation(['sandbox'], 'sandbox', Translation.lang_EN, 'Sandbox');
 
 
 
@@ -210,5 +265,30 @@ if (Meteor.isServer) {
 							   }
 							  ) || [];
 		       });
+
+
+
+	Translation.collection.allow({
+	    insert: function(userId, doc) {
+		//console.log('i',doc);
+		if (doc && doc.key === 'sandbox' && _.find(doc.domain, function(e){return e === 'sandbox';})) {
+		    var search = Translation.collection.findOne({key:'sandbox', domain:'sandbox', lang:doc.lang});
+		    console.log('s',search);
+		    return search === undefined;
+		}
+
+		return false;
+	    },
+	    update: function(userId, doc, fieldNames, modifier) {
+		//console.log('u',doc);
+		return (doc && doc.key === 'sandbox' && _.find(doc.domain, function(e){return e === 'sandbox';}));
+	    },
+	    remove: function(userId, doc) {
+		return false;
+		// },
+		// publish: function(userId, domain, lang) {
+		//     return true;
+	    }
+	});
     });
 }

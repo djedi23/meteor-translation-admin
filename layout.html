@@ -1,0 +1,35 @@
+<template name="layout">
+  <nav class="navbar navbar-inverse" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#translation-navbar-collapse">
+          <span class="sr-only">{{_ 'toggleNavigation' 'nav'}}</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+	</button>
+	<span class="navbar-brand">{{_ 'projectName' 'general'}}</span>
+      </div>
+      <div class="collapse navbar-collapse" id="translation-navbar-collapse">
+	<ul class="nav navbar-nav">
+          <li class="{{activeNavbar "root"}}"><a href="{{pathFor 'root'}}">{{_ 'about' 'nav'}}</a></li>
+          <li class="{{activeNavbar "translation_admin"}}"><a href="{{pathFor 'translation_admin'}}">{{_ 'admin' 'nav'}}</a></li>
+	</ul>
+
+
+	<div class="btn-group navbar-right">
+	  <button type="button" class="btn btn-outline-inv navbar-btn dropdown-toggle" data-toggle="dropdown"> {{currentLang}} <span class="caret"></span>
+	  </button>
+	  <ul class="dropdown-menu" role="menu">
+	    <li><a id="chooseEN" href="#">{{_ "english" "nav"}}</a></li>
+	    <li><a id="chooseFR" href="#">{{_ "french" "nav"}}</a></li>
+	  </ul>
+	</div>
+
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    {{> yield}}
+  </div>
+</template>
