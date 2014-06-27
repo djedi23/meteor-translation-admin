@@ -3,8 +3,13 @@
 
 <p>This package stores translations in a standard Meteor collection. So translations can be reactively binded in your templates.</p>
 
-<p>Translation entries are indentified by <em>domains</em>, <em>keys</em> and <em>languages</em></p>
+<p>
+The following text (the whole page in fact) is translated by the Translation package.
+<pre>{{_ 'sandbox' 'sandbox'}}</pre>
+You can modify the translation of this text by going to the <a href="{{pathFor "translation_admin"}}">Administration</a> page. Then you filter by the key "sandbox" and you modify the translation value. 
+</p>
 
+<p>Translation entries are indentified by <em>domains</em>, <em>keys</em> and <em>languages</em> where</p>
 <ul>
 <li><em>domain</em> represents a group of translation. Domain can be, for example, <em>main</em>, <em>navbar</em>, <em>pageIds</em>, ... An entry can have many domains (same entry in the topbar and the sidebar).</li>
 <li><em>key</em> the id the entry in the domain.</li>
@@ -112,7 +117,7 @@ Translation.collection.allow({<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;remove: function(userId, doc) {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return userId!=null;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;},<br/>
-&nbsp;&nbsp;&nbsp;&nbsp;publish: function(userId, doc) {<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;publish: function(userId, domains, lang, key) {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return userId!=null;<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 });<br/>
@@ -153,7 +158,4 @@ If you define your own publish methods, you can use the following function to ch
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 }<br/>
 </code></p>
-
-{{_ 'sandbox' 'sandbox'}}
-
 </template>
