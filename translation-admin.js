@@ -24,7 +24,7 @@ if (use_router && typeof Router !== 'undefined') {
 	this.route(route_name,
 		   {
 		       path: route_path,
-                       tamplate: 'translation_admin',
+                       template: 'translation_admin',
 		       waitOn: function() { return Meteor.subscribe(Translation.publish, [admin_domain], Translation.currentLang());
 					  },
 		       layoutTemplate: route_template_layout,
@@ -64,7 +64,7 @@ if (Meteor.isClient) {
             if (!_.isEmpty(Session.get("translationSearch_value")))
                 set.value = {$regex: Session.get("translationSearch_value")};
 
-            console.log(set);
+//            console.log(set);
 	    return Translation.collection.find(set, { sort: ["domain", "key"], limit: max_query_size, skip: 0 });
         };
 
