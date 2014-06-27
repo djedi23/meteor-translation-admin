@@ -7,6 +7,5 @@ standard-app-packages
 insecure
 bootstrap3-less
 iron-router
-roles
 less
 translation
