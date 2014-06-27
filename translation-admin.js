@@ -40,7 +40,13 @@ if (use_router && typeof Router !== 'undefined') {
 		       waitOn: function() { return Meteor.subscribe(Translation.publish, ['nav', 'general', admin_domain], Translation.currentLang());
 					  },
 		       layoutTemplate: route_template_layout,
-                       yieldTemplates: route_yieldTemplates
+                       yieldTemplates: route_yieldTemplates,
+		       onAfterAction: function() {
+			   Session.set("translationSearch_domain",""),
+			   Session.set("translationSearch_key",""),
+			   Session.set("translationSearch_lang",""),
+			   Session.set("translationSearch_value","");
+		       }
 		   });
     });
 }
