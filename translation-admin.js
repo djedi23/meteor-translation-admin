@@ -280,14 +280,23 @@ if (Meteor.isServer) {
 		//console.log('i',doc);
 		if (doc && doc.key === 'sandbox' && _.find(doc.domain, function(e){return e === 'sandbox';})) {
 		    var search = Translation.collection.findOne({key:'sandbox', domain:'sandbox', lang:doc.lang});
-		    console.log('s',search);
 		    return search === undefined;
 		}
+		if (doc && doc.value !== undefined && doc.value.length > 128)
+		    return false;
+
 
 		return false;
 	    },
 	    update: function(userId, doc, fieldNames, modifier) {
-		//console.log('u',doc);
+		//console.log('u',modifier);
+		if (modifier.$set.value !== undefined && modifier.$set.value.length > 128)
+		    return false;
+		if (modifier.$set.key !== undefined && modifier.$set.key !== 'sandbox')
+		    return false;
+		if (modifier.$set.domain !== undefined && ! _.find(modifier.$set.domain, function(e){return e === 'sandbox';}))
+		    return false;
+
 		return (doc && doc.key === 'sandbox' && _.find(doc.domain, function(e){return e === 'sandbox';}));
 	    },
 	    remove: function(userId, doc) {
