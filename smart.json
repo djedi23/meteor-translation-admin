@@ -6,6 +6,7 @@
     "bootstrap3-less": {},
     "iron-router": {},
     "roles": {},
-    "fast-render": {}
+    "fast-render": {},
+    "HTML5-History-API": {}
   }
 }
