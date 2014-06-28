@@ -194,13 +194,6 @@ if (Meteor.isClient) {
 	    return Router.current().route.name === item && "active" || false;
 	};
 
-	Template.layout.currentLang = function(){
-	    if (_.find(Translation.lang_FR, function(e){ return e===Translation.currentLang();}))
-		return 'FR';
-	    else
-		return 'EN';
-	};
-
 	Template.layout.events({
 	    'click #chooseEN': function(){
 		Translation.currentLang('en');
@@ -240,6 +233,10 @@ if (Meteor.isServer) {
 
         Translation.addTranslation(['nav'], 'about', Translation.lang_FR, 'À propos');
         Translation.addTranslation(['nav'], 'admin', Translation.lang_FR, 'Administration');
+
+        Translation.addTranslation(['nav'], 'currentLang', Translation.lang_EN, 'EN');
+        Translation.addTranslation(['nav'], 'currentLang', Translation.lang_FR, 'FR');
+
 
         Translation.addTranslation(['nav'], 'english', Translation.lang_EN, 'English');
         Translation.addTranslation(['nav'], 'english', Translation.lang_FR, 'Anglais');
