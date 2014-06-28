@@ -4,7 +4,7 @@
 	    "debug": false,
 	    "admin": {
 		"use_router" : true,
-		"route_path": "translation",
+		"route_path": "/translation",
 		"route_template_layout": "layout"
 	    }
 	}

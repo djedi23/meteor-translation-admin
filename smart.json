@@ -5,6 +5,7 @@
     },
     "bootstrap3-less": {},
     "iron-router": {},
-    "roles": {}
+    "roles": {},
+    "fast-render": {}
   }
 }

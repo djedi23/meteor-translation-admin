@@ -21,35 +21,42 @@ var route_yieldTemplates = set_default("route_yieldTemplates", {});
 
 if (use_router && typeof Router !== 'undefined') {
     Router.map(function() {
-
 	this.route("root",
 		   {
 		       path: '/',
                        template: 'main',
-		       waitOn: function() { return Meteor.subscribe(Translation.publish, ['nav', 'general', 'sandbox'], Translation.currentLang());
-					  },
+		       waitOn: function() {
+                           return Meteor.subscribe(Translation.publish, ['nav', 'general', 'sandbox'], Translation.currentLang());
+		       },
 		       layoutTemplate: route_template_layout,
-                       yieldTemplates: route_yieldTemplates
+                       yieldTemplates: route_yieldTemplates,
+                       fastRender: true
 		   });
-
-
 	this.route(route_name,
 		   {
 		       path: route_path,
                        template: 'translation_admin',
-		       waitOn: function() { return Meteor.subscribe(Translation.publish, ['nav', 'general', admin_domain], Translation.currentLang());
-					  },
+		       waitOn: function() {
+                           return Meteor.subscribe(Translation.publish, ['nav', 'general', admin_domain], Translation.currentLang());
+		       },
 		       layoutTemplate: route_template_layout,
                        yieldTemplates: route_yieldTemplates,
+                       action: function() {
+                            if(this.ready()) {
+                                this.render();  //render your templates as normal when data in onWait is ready
+                            }
+                       },
 		       onAfterAction: function() {
 			   Session.set("translationSearch_domain",""),
 			   Session.set("translationSearch_key",""),
 			   Session.set("translationSearch_lang",""),
 			   Session.set("translationSearch_value","");
-		       }
+		       },
+                       fastRender: true
 		   });
     });
 }
+
 
 
 if (Meteor.isClient) {
