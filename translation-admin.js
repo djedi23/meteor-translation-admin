@@ -21,7 +21,7 @@ var route_yieldTemplates = set_default("route_yieldTemplates", {});
 
 if (use_router && typeof Router !== 'undefined') {
     Router.map(function() {
-	this.route("root",
+	this.route("",
 		   {
 		       path: '/',
                        template: 'main',
