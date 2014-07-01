@@ -26,7 +26,7 @@ if (use_router && typeof Router !== 'undefined') {
 		       path: '/',
                        template: 'main',
 		       waitOn: function() {
-                           return Meteor.subscribe(Translation.publish, ['nav', 'general', 'sandbox'], Translation.currentLang());
+                           return Meteor.subscribe(Translation.publish, ['nav', 'general', 'sandbox', 'readme'], Translation.currentLang());
 		       },
 		       layoutTemplate: route_template_layout,
                        yieldTemplates: route_yieldTemplates,
@@ -254,6 +254,10 @@ if (Meteor.isServer) {
 
         Translation.addTranslation(['sandbox'], 'sandbox', Translation.lang_FR, 'Bac à sable');
         Translation.addTranslation(['sandbox'], 'sandbox', Translation.lang_EN, 'Sandbox');
+
+
+	Translation.addTranslation(['readme'], 'title', Translation.lang_EN, 'API for reactive translations');
+	Translation.addTranslation(['readme'], 'title', Translation.lang_FR, 'Une API pour des traductions réactives');
 
 
 
