@@ -1,0 +1,24 @@
+[
+    {
+	"domains": ["readme"],
+	"entries": [
+	    { "langs" : ["en", "en_US"],
+	      "translations": [
+		  {"key": "title",
+		   "translation": "API for reactive translations"},
+		  {"key": "p1",
+		   "translation": "This package stores its translation's dictionary in a standard Meteor collection. So translations can be reactively binded in your templates."}
+	      ]
+	    },
+	    { "langs" : ["fr", "fr_FR"],
+	      "translations": [
+		  {"key": "title",
+		   "translation": "Une API pour des traductions réactives"},
+		  {"key": "p1",
+		   "translation": "Ce package stocke son dictionnaire de traduction dans une collection Meteor standard. Ainsi les traductions dans les templates sont réactives."}
+	      ]
+	    }
+
+	]
+    }
+]

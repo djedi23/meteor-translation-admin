@@ -217,6 +217,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
     Meteor.startup(function () {
 
+
         Translation.addTranslation([admin_domain], 'domains', Translation.lang_EN, 'Domains');
         Translation.addTranslation([admin_domain], 'key', Translation.lang_EN, 'Key');
         Translation.addTranslation([admin_domain], 'languages', Translation.lang_EN, 'Languages');
@@ -256,9 +257,7 @@ if (Meteor.isServer) {
         Translation.addTranslation(['sandbox'], 'sandbox', Translation.lang_EN, 'Sandbox');
 
 
-	Translation.addTranslation(['readme'], 'title', Translation.lang_EN, 'API for reactive translations');
-	Translation.addTranslation(['readme'], 'title', Translation.lang_FR, 'Une API pour des traductions réactives');
-
+	Translation.addTranslationFromJSON(Assets.getText('translations.json'));
 
 
 	Meteor.publish('translationSearch',

@@ -2,6 +2,7 @@
     "public": {
         "translation" : {
 	    "debug": false,
+	    "fallBack": false,
 	    "admin": {
 		"use_router" : true,
 		"route_name": "translation",
