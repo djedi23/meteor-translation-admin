@@ -1,111 +1,112 @@
 <template name="main">
 <h2>{{_ "title" "readme"}}</h2>
 
-<p>{{_ "p1" "readme"}}</p>
+<p>{{_ "synopsis" "readme"}}</p>
 
 <p>
-As an example, the following text (the whole page in fact) is translated by the Translation package.
+{{_ "example01" "readme"}}
 <pre>{{_ 'sandbox' 'sandbox'}}</pre>
-You can modify the translation of this text by going to the <a href="{{pathFor "translation"}}">Administration</a> page. Then you filter by the key "sandbox" and you modify the translation value. (You are allowed to modify only the sandbox/sandbox domain/key pair.)
+{{_ "example02" "readme"}} <a href="{{pathFor "translation"}}">{{_ "admin" "nav"}}</a> {{_ "example03" "readme"}} {{_ "example04" "readme"}}
 </p>
 
-<p>Translation entries are indentified by <em>domains</em>, <em>keys</em> and <em>languages</em> where</p>
+<p>{{{_ "description01" "readme"}}}</p>
 <ul>
-<li><em>domain</em> represents a group of translation. Domain can be, for example, <em>main</em>, <em>navbar</em>, <em>pageIds</em>, ... An entry can have many domains (same entry in the topbar and the sidebar).</li>
-<li><em>key</em> the id the entry in the domain.</li>
-<li><em>languages</em> is an array of languages the entry should match. An entry could match many languages (an entry can match <em>en-US</em> and <em>en-GB</em>)</li>
+<li>{{{_ "description02" "readme"}}}</li>
+<li>{{{_ "description03" "readme"}}}</li>
+<li>{{{_ "description04" "readme"}}}</li>
 </ul>
 
-<h1>Instalation</h1>
+<h1>{{_ "installation" "readme"}}</h1>
 
-<p>Install meteorite. then type:</p>
+<p>{{_ "installation01" "readme"}}</p>
 <p><code>$ mrt add translation</code></p>
 
-<p>Then subscribe to the translation collection</p>
+<p>{{_ "installation02" "readme"}}</p>
 <p><code>
 Meteor.subscribe(Translation.publish, domains, Translation.currentLang());
 </code></p>
-<p>where <code>domains</code> is an array of domains.</p>
+<p>{{{_ "installation03" "readme"}}}</p>
 
-<h1>Usage</h1>
+<h1>{{_ "usage" "readme"}}</h1>
 
-<h2>Basic usage</h2>
+<h2>{{_ "basicusage" "readme"}}</h2>
 
-<p>In your templates, just use <code>&#123;{_ "key" "domain"}}</code> where domain is the group of translation where to search the key.</p>
+<p>{{{_ "usage01" "readme"}}}</p>
 
-<p>In your code, use <code>Translation._(key, domain)</code>.
-You may prefer to use it in a reactive environment:
+<p>{{_ "usage02" "readme"}}
+{{_ "usage03" "readme"}}
 <code><br/>
 Deps.autorun(function(){<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;myVar = Translation._('siteName', 'main');<br/>
 });
 </code></p>
 
-<h2>Parametrized translations</h2>
+<h2>{{_ "parametricTranslations" "readme"}}</h2>
 
-<p>In your template, you can add parameters to your translations like this
+<p>{{_ "parametricTranslations01" "readme"}}
 <code>&#123;{_ "key" "domain" arg1="Arg 1" arg2="Arg 2" }}</code>.
-Parameter values can be strings or template variables <code>&#123;{_ "key" "domain" arg1=reactiveVar }}</code>.
-Then the variable binds like regular one:
+{{{_ "parametricTranslations02" "readme"}}}
+{{_ "parametricTranslations03" "readme"}}
 <code><br/>
 Template.myTemplate.reactiveVar = function () {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;return "Value" ;
 };
 </code></p>
 
-<p>In the translation entry, the arguments are surounded by braces: <code>{arg}</code>.
-Then the translation should look like: <em>My translation {arg1}</em></p>
+<p>{{{_ "parametricTranslations04" "readme"}}}
+{{{_ "parametricTranslations05" "readme"}}}
+</p>
 
-<p>In your code, you have to pass the parameter as an object to the function <code>Translation._</code>:
+<p>{{{_ "parametricTranslations06" "readme"}}}
 <code><br/>
 Translation._(key, domain, {arg1: ..., arg2:...});
 </code></p>
 
-<h1>Translation language</h1>
+<h1>{{_ "language" "readme"}}</h1>
 
-<p>By defaut, the current language is set to the navigator language.</p>
+<p>{{_ "language01" "readme"}}</p>
 
-<p>You can reading the current language:
+<p>{{_ "language02" "readme"}}
 <code><br/>
 Translation.currentLang()
 </code></p>
 
-<p>And you can set the current language:
+<p>{{_ "language03" "readme"}}
 <code><br/>
 Translation.currentLang(lang);
 </code></p>
 
-<h1>Initial Translations</h1>
+<h1>{{_ "initial" "readme"}}</h1>
 
-<p>You can initialize entries in your Collection
+<p>{{_ "initial01" "readme"}}
 <code><br/>
 Translation.addTranslation(domains, key, lang, translation)
 </code>
-The function <code>addTranslation</code> ensures that the entry is inserted only once.</p>
+{{_ "initial02" "readme"}}</p>
 
-<p>Example:
+<p>{{_ "initial03" "readme"}}
 <code><br/>
 Meteor.isServer &amp;&amp; Meteor.startup(function () {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;Translation.addTranslation(['main', 'navigation'], 'siteName', ['en', 'en-US'], 'My awesome site');<br/>
 });
 </code></p>
 
-<h1>Modify the translation</h1>
+<h1>{{_ "modification" "readme"}}</h1>
 
-<p>Translation doesn't offer API to modify your translation entries. But you have a direct acces to the collection with the variable <code>Translation.collection</code>.</p>
+<p>{{_ "modification01" "readme"}} {{{_ "modification02" "readme"}}}</p>
 
-<p>You can modify your entries with the pattern
+<p>{{_ "modification03" "readme"}}
 <code><br/>
 Translation.collection.update({domain: domain, key: key, lang:lang}, {$set: {value: value}});
 </code></p>
 
-<p>The package <em>translation-admin</em> is an out of the box UI to manage your translations.</p>
+<p>{{{_ "modification04" "readme"}}}</p>
 
-<h2>Translation Security</h2>
+<h2>{{_ "security" "readme"}}</h2>
 
-<p>Translation doesn't provide any insertion, update, remove control on the translation collection. Understand that everybody can inject translation data in your collection and you have to protect it.</p>
+<p>{{_ "security01" "readme"}} {{_ "security02" "readme"}}</p>
 
-<p>For example, to allow only logged user to modify transaltion entries, simply add in your server code:
+<p>{{_ "security03" "readme"}}
 <code><br/>
 Translation.collection.allow({<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;insert: function(userId, doc) {<br/>
@@ -122,29 +123,29 @@ Translation.collection.allow({<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
 });<br/>
 </code>
-If you define your own publish methods, you can use the following function to check if the publication is allowed:
+{{_ "security04" "readme"}}
 <code>Translation.collection.canPublish(this.userId, domains, lang, key)</code></p>
 
-<p>Then in your publish method, apply this pattern:
+<p>{{_ "security05" "readme"}}
 <code><br/>
     return Translation.collection.canPublish(this.userId, domains, lang, key) &amp;&amp; Translation.collection.find({ ... }) || [];
 </code></p>
 
-<h1>Configuration</h1>
+<h1>{{_ "configuration" "readme"}}</h1>
 
-<p>You can configure Translation on startup using <code>Meteor.settings</code>.</p>
+<p>{{_ "configuration01" "readme"}} <code>Meteor.settings</code>.</p>
 
-<p>The available configuration are:</p>
+<p>{{_ "configuration02" "readme"}}</p>
 
 <ul>
-<li><code>Meteor.settings.public.translation.publish</code>: the name of the translation record set.</li>
-<li><code>Meteor.settings.public.translation.uiHelper</code>: the name of the helper used in template. If you prefer <code>{ {i18n ...} }</code>, set the configuration to <em>i18n</em>.</li>
-<li><code>Meteor.settings.public.translation.session</code>: the name of the session that keep track of the current language.</li>
-<li><code>Meteor.settings.public.translation.mongoCollection</code>: the name of the colletion used by translation.</li>
-<li><code>Meteor.settings.public.translation.debug</code>: if true, displays a warning when translation entries aren't found.</li>
+<li><code>Meteor.settings.public.translation.publish</code>: {{_ "configuration03" "readme"}}</li>
+<li><code>Meteor.settings.public.translation.uiHelper</code>: {{{_ "configuration04" "readme"}}}</li>
+<li><code>Meteor.settings.public.translation.session</code>: {{_ "configuration05" "readme"}}</li>
+<li><code>Meteor.settings.public.translation.mongoCollection</code>: {{_ "configuration06" "readme"}}</li>
+<li><code>Meteor.settings.public.translation.debug</code>: {{_ "configuration06" "readme"}}</li>
 </ul>
 
-<p>The default configuration is:
+<p>{{_ "configuration08" "readme"}}
 <code><br/>
 {<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;"public": {<br/>
