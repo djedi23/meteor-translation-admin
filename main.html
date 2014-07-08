@@ -33,7 +33,7 @@ Meteor.subscribe(Translation.publish, domains, Translation.currentLang());
 
 <p>{{{_ "usage01" "readme"}}}</p>
 
-<p>{{_ "usage02" "readme"}}
+<p>{{{_ "usage02" "readme"}}}
 {{_ "usage03" "readme"}}
 <code><br/>
 Deps.autorun(function(){<br/>
@@ -82,7 +82,7 @@ Translation.currentLang(lang);
 <code><br/>
 Translation.addTranslation(domains, key, lang, translation)
 </code>
-{{_ "initial02" "readme"}}</p>
+{{{_ "initial02" "readme"}}}</p>
 
 <p>{{_ "initial03" "readme"}}
 <code><br/>
@@ -142,7 +142,7 @@ Translation.collection.allow({<br/>
 <li><code>Meteor.settings.public.translation.uiHelper</code>: {{{_ "configuration04" "readme"}}}</li>
 <li><code>Meteor.settings.public.translation.session</code>: {{_ "configuration05" "readme"}}</li>
 <li><code>Meteor.settings.public.translation.mongoCollection</code>: {{_ "configuration06" "readme"}}</li>
-<li><code>Meteor.settings.public.translation.debug</code>: {{_ "configuration06" "readme"}}</li>
+<li><code>Meteor.settings.public.translation.debug</code>: {{_ "configuration07" "readme"}}</li>
 </ul>
 
 <p>{{_ "configuration08" "readme"}}
