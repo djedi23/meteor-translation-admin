@@ -90,7 +90,6 @@ if (Meteor.isClient) {
             if (!_.isEmpty(Session.get("translationSearch_value")))
                 set.value = {$regex: Session.get("translationSearch_value")};
 
-	    //            console.log(set);
 	    return Translation.collection.find(set, { sort: ["domain", "key"], limit: max_query_size, skip: 0 });
         };
 
