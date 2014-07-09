@@ -6,9 +6,7 @@
   "version": "0.1.0",
   "git": "https://github.com/djedi23/meteor-translation-admin.git",
   "packages": {
-    "translation": {
-      "path": "/home/djedi/prj/meteor/translation"
-    },
+    "translation": {},
     "bootstrap3-less": {},
     "iron-router": {}
   }
