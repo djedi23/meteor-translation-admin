@@ -1,11 +1,15 @@
 {
+  "name": "translation-admin",
+  "description": "Administration GUI for translation",
+  "homepage": "https://github.com/djedi23/meteor-translation-admin",
+  "author": "Moise Valvassori <moise.valvassori@gmail.com>",
+  "version": "0.1.0",
+  "git": "https://github.com/djedi23/meteor-translation-admin.git",
   "packages": {
     "translation": {
-      "path": "/home/djedi/prj/meteor/translation"
     },
     "bootstrap3-less": {},
     "iron-router": {},
-    "roles": {},
     "fast-render": {},
     "HTML5-History-API": {}
   }
