@@ -243,7 +243,6 @@ if (Meteor.isServer) {
         Translation.addTranslation(['nav'], 'currentLang', Translation.lang_EN, 'EN');
         Translation.addTranslation(['nav'], 'currentLang', Translation.lang_FR, 'FR');
 
-
         Translation.addTranslation(['nav'], 'english', Translation.lang_EN, 'English');
         Translation.addTranslation(['nav'], 'english', Translation.lang_FR, 'Anglais');
 
