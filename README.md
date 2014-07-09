@@ -1,3 +1,26 @@
+Administration GUI for translation
+
+Try the demo at: http://translation.meteor.com/translation
+
+
+
+# Instalation
+
+```
+$ mrt add translation-admin
+```
+
+# Usage
+
+## Basic usage
+
+Just go to:
+http://url/translation
+
+
+# Configuration
+
+```
 {
     "public": {
         "translation" : {
@@ -13,3 +36,4 @@
 	}
     }
 }
+```
