@@ -1,4 +1,4 @@
-Administration GUI for translation
+Administration GUI for translation ( https://atmospherejs.com/package/translation )
 
 Try the demo at: http://translation.meteor.com/translation
 
